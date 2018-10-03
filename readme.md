@@ -12,7 +12,7 @@ include __DIR__ . '/tinyhooks.php';
 
 ## Basic usage
 
-### Set by anonymous function
+### Set by an anonymous function
 
 The most basic way to setup a hook is with a anonymus function like below.
 
@@ -27,7 +27,7 @@ hook::set('myhook', function($args) {
 Below will output `Hello world` on the screen, if you have set the hook like above.
 
 ```php
-echo hook('myhook', 'world'); // Output will be "Hello world"
+echo hook('myhook', 'world');
 ```
 
 ## Set by other types
@@ -40,7 +40,7 @@ If you use a string as a second argument, you will call a function.
 hook::set($name, 'about');
 
 function about($args) {
-  // Return something
+  // Do something
 }
 ```
 
@@ -53,7 +53,7 @@ hook::set($name, 'MyStatic::myhook');
 
 class MyStatic {
   public static function myhook($args) {
-    // Return something
+    // Do something
   }
 }
 ```
@@ -65,11 +65,11 @@ To use a function in a class, you need to create an object. Then you need to sen
 ```php
 $object = new MyClass();
 
-hook($name, [$object, 'myhook']);
+hook::set($name, [$object, 'myhook']);
 
 class MyClass {
   function myhook($args) {
-    // Return something
+    // Do something
   }
 }
 ```
@@ -82,12 +82,12 @@ You can setup all your hooks with an array. The `key` of every row is the patter
 hooks::set([
   [
     'myhook' => function($args) {
-      // Return something
+      // Do something
     }
   ],
   [
     'myhook' => function($args) {
-      // Return something
+      // Do something
     }
   ]
 ]);
@@ -114,8 +114,8 @@ Donate to [DevoneraAB](https://www.paypal.me/DevoneraAB) if you want.
 
 ## Inspiration
 
-- [Kirby CMS hooks](https://getkirby.com/docs/developer-guide/advanced/hooks) General inspiration.
-- [WordPress hooks](https://codex.wordpress.org/Plugin_API#Hook_to_WordPress) General inspiration.
+- [Kirby CMS hooks](https://getkirby.com/docs/developer-guide/advanced/hooks) Multiple names support idea.
+- [WordPress hooks](https://codex.wordpress.org/Plugin_API#Hook_to_WordPress) Actions and filters.
 
 ## License
 
