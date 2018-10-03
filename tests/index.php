@@ -28,5 +28,36 @@ class MyObject {
     return 'Object ' . $args;
   }
 }
-
 echo hook('test', "world\n");
+
+// Multiple strings
+hook::set('output', function() {
+  return 'String';
+});
+hook::set('output', function() {
+  return ' Another string';
+});
+echo hook('output');
+
+// Multiple arrayes
+hook::set('arrays', function() {
+  return ['key' => 'value'];
+});
+hook::set('arrays', function() {
+  return ['key2' => 'value2'];
+});
+print_r(hook('arrays'));
+
+// Multiple objects
+hook::set('objects', function() {
+  return (object)['key' => 'value'];
+});
+hook::set('objects', function() {
+  return (object)[
+    'key2' => 'value2',
+    'nested' => [
+      'hello' => 'world'
+    ]
+  ];
+});
+print_r(hook('objects'));

@@ -7,11 +7,17 @@ class hook {
 
   public static function trigger($name, $args = []) {
     global $hooks;
-    $out = '';
+
     if(!empty($hooks)) {
+      $firstcall = self::call($hooks[$name][0], $args);
+      $type = gettype($firstcall);
+      $out = $type == 'string' ? '' : [];
+
       foreach($hooks[$name] as $hook) {
-        //$out .= $hook($data);
-        $out .= self::call($hook, $args);
+        if($type == 'string')
+          $out .= self::call($hook, $args);
+        else
+          $out[] = self::call($hook, $args);
       }
     }
     return $out;
