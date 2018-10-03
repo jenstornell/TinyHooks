@@ -76,16 +76,28 @@ class MyClass {
 
 ## Multiple hooks in one go
 
-You can setup all your hooks with a single array. The `key` of every row is the pattern and the `value` is the call. That way it works very similar to the `hook::set()` function.
+You can setup all your hooks with an array. The `key` of every row is the pattern and the `value` is the call. That way it works very similar to the `hook::set()` function.
 
 ```php
-hooks::set([ EJKLAR!!!!!!!!!!!!!!!!!!
-  '/' => 'myFunction',
-  'about/:any' => function($matches) {
-    // Return something
-  }
+hooks::set([
+  [
+    'myhook' => function($args) {
+      // Return something
+    }
+  ],
+  [
+    'myhook' => function($args) {
+      // Return something
+    }
+  ]
 ]);
 ```
+
+## Actions & filters
+
+You can use the hooks both as actions or as filters.
+
+If you want to do something and don't want to return something, it's an action. If you want it to behave more like a filter, then return something from the hook.
 
 ## Donate
 

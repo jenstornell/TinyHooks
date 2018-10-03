@@ -61,3 +61,38 @@ hook::set('objects', function() {
   ];
 });
 print_r(hook('objects'));
+
+//Multiple names
+hook::set('name1', function() {
+  return 'Hook for a single name' . "\n";
+});
+hook::set(['name1', 'name2'], function() {
+  return 'Same hook for two names';
+});
+
+echo "name1:\n" . hook('name1') . "\n\n";
+echo "name2:\n" . hook('name2') . "\n\n";
+
+//Match by regex
+hook::set('regex.*', function() {
+  return 'Regex' . "\n";
+});
+
+echo hook('regex');
+echo hook('regex123');
+
+// Multiple hooks
+hooks::set([
+  [
+    'multiple' => function($args) {
+      return "From 1" .  $args . "\n";
+    },
+  ],
+  [
+    'multiple' => function($args) {
+      return "From 2\n";
+    }
+  ]
+]);
+
+echo hook('multiple', ' Number one');
